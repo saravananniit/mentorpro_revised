@@ -1,9 +1,14 @@
-name: Deploy
+name: Deploy Vite React App to GitHub Pages
 
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
+# Prevents concurrent deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -12,7 +17,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
