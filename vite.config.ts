@@ -1,7 +1,10 @@
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: "/mentorpro_revised/",
   plugins: [react()],
-});
+  base: '/mentorpro_revised/',
+  build: {
+    outDir: 'dist',
+  },
+})
