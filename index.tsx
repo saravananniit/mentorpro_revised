@@ -12,7 +12,7 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-     <BrowserRouter basename="/mentorpro_revised">
+     <BrowserRouter basename="/mentorpro_r/">
       <App />
     </BrowserRouter>
   </React.StrictMode>
