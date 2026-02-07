@@ -3,11 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,12 +20,17 @@ jobs:
           node-version: '20'
           cache: 'npm'
       
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
       
-      - run: npm run build
+      - name: Build application
+        run: npm run build
       
-      - uses: peaceiris/actions-gh-pages@v4
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
